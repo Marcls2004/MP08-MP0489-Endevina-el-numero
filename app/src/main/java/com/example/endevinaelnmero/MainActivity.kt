@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         val tv = findViewById<TextView>(R.id.textView)
         val tvAttempts = findViewById<TextView>(R.id.textView2)
-        tv.movementMethod = ScrollingMovementMethod()
+        //Para hacer el scroll sin el ScrollView = tv.movementMethod = ScrollingMovementMethod()
 
         // Para aplicar estilos
         tv.setText("You haven't made any attempts")
@@ -43,12 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         // para poner tipo de letra y tamaño
         tv.typeface = face
-        tv.setTextSize(18f)
-        tv.gravity = Gravity.CENTER
 
         tvAttempts.typeface = face
-        tvAttempts.setTextSize(18f)
-        tvAttempts.gravity = Gravity.CENTER
 
         // Añade esto debajo de tv.gravity = Gravity.CENTER
         tv.maxLines = 10
@@ -66,11 +62,7 @@ class MainActivity : AppCompatActivity() {
                 tvAttempts.setText("Attempts: " + attempts.toString())
                 tv.setText(tv.getText().toString() + "\nAttempt " + attempts.toString() + ", the number is smaller")
 
-                // SCROLL AUTOMÁTICO DEL TEXTVIEW: Calcula las líneas y baja automáticamente
-                tv.post {
-                    val scrollAmount = tv.layout?.getLineTop(tv.lineCount)?.minus(tv.height) ?: 0
-                    if (scrollAmount > 0) tv.scrollTo(0, scrollAmount)
-                }
+
 
             } else if(tn.text.toString().toInt() < num_random){
                 val text: CharSequence = "The number is larger"
@@ -82,11 +74,6 @@ class MainActivity : AppCompatActivity() {
                 tvAttempts.setText("Attempts: " + attempts.toString())
                 tv.setText(tv.getText().toString() + "\nAttempt " + attempts.toString() + ", the number is larger")
 
-                // SCROLL AUTOMÁTICO DEL TEXTVIEW: Calcula las líneas y baja automáticamente
-                tv.post {
-                    val scrollAmount = tv.layout?.getLineTop(tv.lineCount)?.minus(tv.height) ?: 0
-                    if (scrollAmount > 0) tv.scrollTo(0, scrollAmount)
-                }
 
             } else if (tn.text.toString().toInt() == num_random){
                 num_random = (Math.random() * 10).toInt() + 1
